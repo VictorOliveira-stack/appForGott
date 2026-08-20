@@ -1,0 +1,55 @@
+@media (min-width: 320px) {
+
+    body{
+        background: rgba(216, 242, 251, 0.108);
+        margin: 0;
+        margin-top: 0;
+    }
+    
+    #headerfront{
+        position:fixed;
+        z-index: 1000;
+        top: 0;
+        background: white;
+        width: 100%;
+        box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.585);
+
+    }
+
+    #imagemLogo{
+       height: 5em;
+       width: 8em;
+       margin-top: -1em;
+       margin-left: -12px;
+    }
+
+
+
+    /*area que renderiza os cards*/
+    #renderGetFetch{
+        width: 98%;
+        margin-left: 3px;
+        margin-top: 8em;
+    }
+
+}
+
+/*Small devices (landscape phones, 576px and up)*/
+@media (min-width: 576px) {
+     #imagemLogo{
+        height: 10em;
+        width: 20em;
+     }
+}
+
+/*Medium devices (tablets, 768px and up)*/
+@media (min-width: 768px) { }
+
+/*Large devices (desktops, 992px and up)*/
+@media (min-width: 992px) {  }
+
+/* X-Large devices (large desktops, 1200px and up)*/
+@media (min-width: 1200px) { }
+
+/*XX-Large devices (larger desktops, 1400px and up)*/
+@media (min-width: 1400px) { }
