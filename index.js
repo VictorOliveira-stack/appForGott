@@ -24,7 +24,7 @@ async function carregarPosts() {
         //const eOPrimeiro = index === 0;
   
         htmlContent += `
-          <div class="accordion-item">
+          <div class="accordion-item" style="box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.585);">
             <h2 class="accordion-header" id="${headingId}">
               <button class="accordion-button collapsed"
                       type="button" 
@@ -32,8 +32,10 @@ async function carregarPosts() {
                       data-bs-target="#${collapseId}"
                       aria-expanded="false"
                       aria-controls="${collapseId}">
-                <h2>${item.titulo}</h2>
+                <h3>${item.titulo}</h3>
+                
               </button>
+              <hr>
             </h2>
             
             <div id="${collapseId}" 
