@@ -22,16 +22,24 @@ async function carregarPosts() {
         
         // O primeiro item inicia aberto (show), os demais fechados (collapsed) //retirei essa ideia do primeiro item aparecer aberto
         //const eOPrimeiro = index === 0;
+
+        let htmlImagem = ""
+        if(item.imagem && item.imagem !== ""){
+          htmlImagem = `
+            <div class="mb-2 text-center">
+              <img src="data:image/jpeg;base64,${item.imagem}" 
+                  class="img-fluid rounded" 
+                  alt="Imagem do post" 
+                  style="max-height: 250px; width: 100%; object-fit: cover;">
+            </div>
+        `;
+        }
   
         htmlContent += `
           <div class="accordion-item" style="box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.585);">
-
-          <div class="mt-3 text-center">
-          <img src="data:image/jpeg;base64,${item.imagem}" 
-               class="img-fluid rounded" 
-               alt="Imagem da postagem" 
-               style="max-height: 350px; object-fit: contain;">
-          </div>
+          
+            <!-- Imagem fica dentro do botão (se existir) -->
+            ${htmlImagem}
 
             <h2 class="accordion-header" id="${headingId}">
               <button class="accordion-button collapsed"
