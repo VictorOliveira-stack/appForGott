@@ -25,6 +25,14 @@ async function carregarPosts() {
   
         htmlContent += `
           <div class="accordion-item" style="box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.585);">
+
+          <div class="mt-3 text-center">
+          <img src="data:image/jpeg;base64,${item.imagem}" 
+               class="img-fluid rounded" 
+               alt="Imagem da postagem" 
+               style="max-height: 350px; object-fit: contain;">
+          </div>
+
             <h2 class="accordion-header" id="${headingId}">
               <button class="accordion-button collapsed"
                       type="button" 
@@ -62,6 +70,7 @@ async function carregarPosts() {
         console.log(`o titulo: ${item.titulo}`);
             console.log(`o texto: ${item.texto}`);
             console.log(`o autor: item: ${item.autor}`)
+            console.log(`Imagem: ${item.imagem}`)
             console.log("_____________________________________")
       });
   
