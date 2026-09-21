@@ -1,100 +1,100 @@
 async function carregarPosts() {
-    try {
-      //const resposta = await fetch("https://dbsqlite.onrender.com/receberdocliente");
+  try {
+    const resposta = await fetch("https://dbsqlite.onrender.com/enderFront");
 
-      const resposta = await fetch("https://dbsqlite.onrender.com/enderFront");
-      
-      if (!resposta.ok) {
-        throw new Error(`Erro: ${resposta.status}`);
-      }
-  
-      const dados = await resposta.json();
-      dados.reverse(); //inverte a ordem do array para o ultimo virar o primeiro
-      const container = document.getElementById("renderGetFetch");
+    if (!resposta.ok) {
+      throw new Error(`Erro: ${resposta.status}`);
+    }
 
-      console.log(`os dados da API: `, dados)
-  
-      // Começamos a construir a estrutura da sanfona (accordion)
-      let htmlContent = `<div class="accordion" id="accordionPosts">`;
-  
-      dados.forEach((item, index) => {
-        // Criamos IDs únicos para o Bootstrap saber qual item abrir/fechar
-        const collapseId = `collapse${index}`;
-        const headingId = `heading${index}`;
-        
-        // O primeiro item inicia aberto (show), os demais fechados (collapsed) //retirei essa ideia do primeiro item aparecer aberto
-        //const eOPrimeiro = index === 0;
+    // 1. Recebe a resposta do servidor (é um objeto com { status, message, dados })
+    const respostaServidor = await resposta.json();
+    console.log(`Dados brutos da API:`, respostaServidor);
 
-        let htmlImagem = ""
-        if(item.imagem && item.imagem !== ""){
-          htmlImagem = `
-            <div class="mb-2 text-center">
-              <img src="data:image/jpeg;base64,${item.imagem}" 
-                  class="img-fluid rounded" 
-                  alt="Imagem do post" 
-                  style="max-height: 250px; width: 100%; object-fit: cover;">
-            </div>
+    // 2. Extrai a lista de posts de dentro de respostaServidor.dados
+    const listaPosts = respostaServidor.dados;
+
+    // Garantia de que temos um Array para iterar
+    if (!Array.isArray(listaPosts)) {
+      console.error("A propriedade 'dados' não veio como lista:", listaPosts);
+      return;
+    }
+
+    // 3. Inverte a ordem da lista (o último cadastrado fica em primeiro)
+    listaPosts.reverse();
+
+    const container = document.getElementById("renderGetFetch");
+
+    // Começamos a construir a estrutura do accordion
+    let htmlContent = `<div class="accordion" id="accordionPosts">`;
+
+    listaPosts.forEach((item, index) => {
+      const collapseId = `collapse${index}`;
+      const headingId = `heading${index}`;
+
+      let htmlImagem = "";
+      if (item.imagem && item.imagem !== "") {
+        htmlImagem = `
+          <div class="mb-2 text-center">
+            <img src="data:image/jpeg;base64,${item.imagem}" 
+                class="img-fluid rounded" 
+                alt="Imagem do post" 
+                style="max-height: 250px; width: 100%; object-fit: cover;">
+          </div>
         `;
-        }
-  
-        htmlContent += `
-          <div class="accordion-item" style="box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.585);">
+      }
+
+      htmlContent += `
+        <div class="accordion-item" style="box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.585);">
+        
+          ${htmlImagem}
+
+          <h2 class="accordion-header" id="${headingId}">
+            <button class="accordion-button collapsed"
+                    type="button" 
+                    data-bs-toggle="collapse" 
+                    data-bs-target="#${collapseId}"
+                    aria-expanded="false"
+                    aria-controls="${collapseId}">
+              <h3>${item.titulo}</h3>
+            </button>
+            <hr>
+          </h2>
           
-            <!-- Imagem fica dentro do botão (se existir) -->
-            ${htmlImagem}
-
-            <h2 class="accordion-header" id="${headingId}">
-              <button class="accordion-button collapsed"
-                      type="button" 
-                      data-bs-toggle="collapse" 
-                      data-bs-target="#${collapseId}"
-                      aria-expanded="false"
-                      aria-controls="${collapseId}">
-                <h3>${item.titulo}</h3>
-                
-              </button>
-              <hr>
-            </h2>
-            
-            <div id="${collapseId}" 
-                 class="accordion-collapse collapse" 
-                 aria-labelledby="${headingId}" 
-                 data-bs-parent="#accordionPosts">
-              <div class="accordion-body">
-                ${item.texto}
-                
-
-
-              </div>
+          <div id="${collapseId}" 
+               class="accordion-collapse collapse" 
+               aria-labelledby="${headingId}" 
+               data-bs-parent="#accordionPosts">
+            <div class="accordion-body">
+              ${item.texto}
             </div>
-
-            <div class="mt-3 text- text-muted" style="margin-left: 22px;">
-                  <small>Por: <strong>${item.autor}</strong></small>
-            </div>
-
           </div>
 
-          <br>
-        `;
+          <div class="mt-3 text-muted" style="margin-left: 22px;">
+            <small>Por: <strong>${item.autor}</strong></small>
+          </div>
 
-        console.log(`o titulo: ${item.titulo}`);
-            console.log(`o texto: ${item.texto}`);
-            console.log(`o autor: item: ${item.autor}`)
-            console.log(`Imagem: ${item.imagem}`)
-            console.log("_____________________________________")
-      });
-  
-      htmlContent += `</div>`;
-  
-      // Injeta todo o HTML gerado na div container
-      container.innerHTML = htmlContent;
-  
-    } catch (erro) {
-      console.error("Erro ao carregar dados:", erro);
-    }
+        </div>
+        <br>
+      `;
+
+      console.log(`Título: ${item.titulo}`);
+      console.log(`Texto: ${item.texto}`);
+      console.log(`Autor: ${item.autor}`);
+      console.log("_____________________________________");
+    });
+
+    htmlContent += `</div>`;
+
+    // Injeta todo o HTML gerado na div container
+    container.innerHTML = htmlContent;
+
+  } catch (erro) {
+    console.error("Erro ao carregar dados:", erro);
   }
-  carregarPosts();
-  setInterval(carregarPosts, 10 * 60 * 1000)//600000
+}
+
+carregarPosts();
+setInterval(carregarPosts, 10 * 60 * 1000); // Executa a cada 10 minutos
 
 /*async function buscarDados(){
     try {
