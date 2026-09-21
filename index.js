@@ -1,6 +1,8 @@
 async function carregarPosts() {
     try {
-      const resposta = await fetch("https://dbsqlite.onrender.com/receberdocliente");
+      //const resposta = await fetch("https://dbsqlite.onrender.com/receberdocliente");
+
+      const resposta = await fetch("https://dbsqlite.onrender.com/enderFront");
       
       if (!resposta.ok) {
         throw new Error(`Erro: ${resposta.status}`);
