@@ -6,11 +6,11 @@ async function carregarPosts() {
       throw new Error(`Erro: ${resposta.status}`);
     }
 
-    // 1. Recebe a resposta do servidor (é um objeto com { status, message, dados })
+    // Recebe a resposta do servidor (é um objeto com { status, message, dados })
     const respostaServidor = await resposta.json();
     console.log(`Dados brutos da API:`, respostaServidor);
 
-    // 2. Extrai a lista de posts de dentro de respostaServidor.dados
+    // Extrai a lista de posts de dentro de respostaServidor.dados
     const listaPosts = respostaServidor.dados;
 
     // Garantia de que temos um Array para iterar
@@ -19,7 +19,7 @@ async function carregarPosts() {
       return;
     }
 
-    // 3. Inverte a ordem da lista (o último cadastrado fica em primeiro)
+    // Inverte a ordem da lista (o último cadastrado fica em primeiro)
     listaPosts.reverse();
 
     const container = document.getElementById("renderGetFetch");
@@ -70,7 +70,7 @@ async function carregarPosts() {
           </div>
 
           <div class="mt-3 text-muted" style="margin-left: 22px;">
-            <small>Por: <strong>${item.autor}</strong></small>
+            <small>Por:<strong> <a href="perfil.html?autor=${encodeURIComponent(item.autor)}">${item.autor}</a></strong></a></small>
           </div>
 
         </div>
@@ -95,6 +95,12 @@ async function carregarPosts() {
 
 carregarPosts();
 setInterval(carregarPosts, 10 * 60 * 1000); // Executa a cada 10 minutos
+
+/*
+        <div class="mt-3 text-muted" style="margin-left: 22px;">
+            <small>Por:<strong> <a href="perfil.html?id=${item.id}&nome=${encodeURIComponent(item.autor)}">${item.autor}</strong></a></small>
+          </div>
+*/
 
 /*async function buscarDados(){
     try {
