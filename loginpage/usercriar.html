@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="usercriar.css">
+    <title>Create User</title>
+</head>
+<body>
+    <div id="container">
+
+        <div id="formCreateUser">
+
+            
+                
+                <input class="formCreateUserForm" type="text" id="nameformCreateUser" placeholder="Insira seu nome">
+                <hr style="background-color: #1a73e8af; height: 1px; border: none;">
+                
+                <input class="formCreateUserForm" type="email" id="emailformCreateUser" placeholder="Insira seu e-mail">
+                <hr style="background-color: #1a73e8af; height: 1px; border: none;">
+
+                <input class="formCreateUserForm" type="password" id="passwordformCreateUser" placeholder="Crie sua senha">
+                <hr style="background-color: #1a73e8af; height: 1px; border: none;">
+
+                <label class="formFileCreateUserForm">
+                    <span>Escolha uma foto de perfil</span>
+                    <input type="file" id="fotoperfilformCreateUser" accept="image/*">
+                  </label>
+                <hr style="background-color: #1a73e8af; height: 1px; border: none;">
+                <br>
+
+                <button onclick="createUserJson()" class="buttonform" type="submit">criar usuario</button>
+
+
+        </div>
+
+    </div>
+
+    <script src="./loginpage/createuser.js"></script>
+</body>
+</html>

@@ -5,7 +5,7 @@
 "Filter fetch API results by URL parameter in JavaScript" */
 
 async function carregarPostsDoUsuario() {
-    // 1. Extrai o nome do autor passado na URL (ex: perfil.html?autor=victor)
+    //Extrai o nome do autor passado na URL (ex: perfil.html?autor=victor)
     const urlParams = new URLSearchParams(window.location.search);
     const autorProcurado = urlParams.get("autor");
   

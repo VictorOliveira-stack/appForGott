@@ -1,0 +1,92 @@
+@media (min-width: 320px) {
+
+    body{
+        font-family:Arial, Helvetica, sans-serif;
+        
+    }
+
+    #formCreateUser{
+        padding-top: 1em;
+        padding-bottom: 1em;
+        padding-left: 1em;
+        padding-right: 1em;
+        width: 12em;
+        border: 1px #1A73E8 solid;
+        border-radius: 10px;
+    }
+
+    .formCreateUserForm {
+        border: none;
+        outline: none; /* Remove o contorno padrão do navegador ao clicar */
+        padding: 8px 12px;
+        border: 1px solid transparent; 
+        transition: border-color 0.2s ease;
+        border-radius: 6px;
+        
+      }
+      
+      /* Estilo aplicado quando o usuário clica ou foca no campo */
+      .formCreateUserForm:focus {
+        border-color: #1A73E8; /* Sua cor azul */
+      }
+
+    .buttonform{
+        border: 1px;
+        border-radius: 4px;
+        background-color: #1A73E8;
+        color: white;      
+        margin-left: 4em;
+        margin-right: 4em;
+        
+    }
+    .hr1{
+        color: #1A73E8;
+    }
+
+    /* 1. Estiliza o Label para parecer com o input de e-mail */
+.formFileCreateUserForm {
+    font-size: 13px;
+    display: inline-block;
+    padding: 8px 12px;
+    border: 2px solid transparent; /* Evita que o layout pule ao focar */
+    border-radius: 4px;            /* Ajuste conforme o seu layout */
+    background-color: #ffffff;    /* Altere para a cor de fundo do seu formulário */
+    color: #555555c6;                   /* Cor do texto estilo placeholder */
+    cursor: pointer;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    user-select: none;
+  }
+  
+  /* 2. Esconde o input de arquivo nativo (botão padrão do SO) */
+  .formFileCreateUserForm input[type="file"] {
+    display: none;
+  }
+  
+  /* 3. Efeito ao passar o mouse ou clicar (Foco emulado) */
+  .formFileCreateUserForm:hover,
+  .formFileCreateUserForm:focus-within {
+    border-color: #1A73E8; /* Cor azul configurada nos passos anteriores */
+    outline: none;
+  }
+
+}
+
+/*Small devices (landscape phones, 576px and up)*/
+@media (min-width: 576px) {
+     #imagemLogo{
+        height: 10em;
+        width: 20em;
+     }
+}
+
+/*Medium devices (tablets, 768px and up)*/
+@media (min-width: 768px) { }
+
+/*Large devices (desktops, 992px and up)*/
+@media (min-width: 992px) {  }
+
+/* X-Large devices (large desktops, 1200px and up)*/
+@media (min-width: 1200px) { }
+
+/*XX-Large devices (larger desktops, 1400px and up)*/
+@media (min-width: 1400px) { }
