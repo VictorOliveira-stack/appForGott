@@ -34,6 +34,7 @@ async function createUserJson(){
             headers: {
                 'Content-Type': 'application/json'
             },
+            credentials: 'include', // <--- ESSENCIAL para aceitar o cookie de sessão do backend
             body: JSON.stringify(dadosJson)
         })
 
