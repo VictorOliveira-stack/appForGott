@@ -11,20 +11,16 @@
 
         <div id="formLogin">
 
-            <form action="" method="post">
-                
-                <input class="formLoginForm" type="email" placeholder="Insira seu e-mail">
+            <div id="form-login-box">    
+                <input id="apiEmailLogin" class="formLoginForm" type="email" placeholder="Insira seu e-mail">
                 <hr style="background-color: #1a73e8af; height: 1px; border: none;">
 
-                <input class="formLoginForm" type="password" placeholder="Insira sua senha"> 
+                <input id="apiPasswordLogin" class="formLoginForm" type="password" placeholder="Insira sua senha"> 
                 <hr style="background-color: #1a73e8af; height: 1px; border: none;"><br>
 
 
-                <button class="buttonform" type="submit">Fazer Login</button>
-
-            </form>
-
-            
+                <button class="buttonform" type="button" onclick="fazerLoginFromFronendjson()" >Fazer Login</button>
+            </div>
 
         </div>
 
@@ -35,5 +31,7 @@
         <a href="../profile/profile.html">perfil</a>
 
     </div>
+
+    <script src="./login.js"></script>
 </body>
 </html>
