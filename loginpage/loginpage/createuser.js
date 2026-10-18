@@ -11,8 +11,14 @@ async function createUserJson(){
       const password = passwordformCreateUser
       //const fotoperfil = fotoperfilformCreateUser
 
+      if (!nameformCreateUser || !emailformCreateUser || !passwordformCreateUser) {
+        alert("Preencha todos os campos!");
+        return;
+      }
+
       console.log("dados!", nameformCreateUser, emailformCreateUser, passwordformCreateUser)
       console.log("daods 2:", name, email, password)
+      
 
       dadosJson = {
         
@@ -21,6 +27,7 @@ async function createUserJson(){
         password
         //fotoperfil
       }
+      console.log("Iniciando requisição para criar usuário...", dadosJson);
 
       try {
 
@@ -37,23 +44,31 @@ async function createUserJson(){
             credentials: 'include', // <--- ESSENCIAL para aceitar o cookie de sessão do backend
             body: JSON.stringify(dadosJson)
         })
+        console.log("Resposta recebida do servidor. Status:", sentJson.status);
 
         if (!sentJson.ok){
-            throw new Error(`Erro na requisição: ${sentJson.status}`)
+            //throw new Error(`Erro na requisição: ${sentJson.status}`)
+            const erroData = await sentJson.json().catch(() => ({}));
+            throw new Error(erroData.error || `Erro na requisição: ${sentJson.status}`);
         }
 
         
         // Ler como texto primeiro para verificar se a resposta não veio vazia
-        const textResponse = await sentJson.text();
-        const dadosRetornados = textResponse ? JSON.parse(textResponse) : {};
-
+        //const dadosRetornados = textResponse ? JSON.parse(textResponse) : {};
+        const dadosRetornados = await sentJson.json();
         console.log('Sucesso ao enviar:', dadosRetornados);
+
+        console.log("Tentando redirecionar para login.html...");
+
+        window.location.href = "./login.html"
         
       //}
 
         
     } catch (error) {
         console.log("erro em createUserJson, createuser.js: ", error)
+        alert("Falha ao criar usuário: " + error.message);
     }
 }
+
 //createUserJson()
