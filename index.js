@@ -93,7 +93,7 @@ async function carregarPosts() {
 }
 
 // Função de Compartilhamento (Nativo em celulares ou copia o link no PC)
-function compartilharPost(idDoPost, tituloDoPost) {
+/*function compartilharPost(idDoPost, tituloDoPost) {
     const urlDoPost = window.location.origin + window.location.pathname + "#" + idDoPost;
 
     if (navigator.share) {
@@ -109,6 +109,26 @@ function compartilharPost(idDoPost, tituloDoPost) {
             console.error('Erro ao copiar link: ', err);
         });
     }
+}*/
+
+function compartilharPost(idDoPost, tituloDoPost) {
+  // Monta apenas a URL limpa com o ID do post
+  const urlDoPost = window.location.origin + window.location.pathname + "#" + idDoPost;
+
+  // Se o navegador do celular suportar Web Share API
+  if (navigator.share) {
+      navigator.share({
+          title: tituloDoPost,
+          url: urlDoPost,
+      }).catch((error) => console.log('Erro ao compartilhar:', error));
+  } else {
+      // Fallback: Copia o link direto para a área de transferência
+      navigator.clipboard.writeText(urlDoPost).then(() => {
+          alert("Link copiado para a área de transferência!");
+      }).catch(err => {
+          console.error('Erro ao copiar link: ', err);
+      });
+  }
 }
 
 // Opcional: Rola a página automaticamente para o post se o usuário abrir o link direto
