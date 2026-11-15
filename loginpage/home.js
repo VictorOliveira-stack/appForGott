@@ -67,7 +67,8 @@ async function carregarPosts() {
           </div>
 
           <div class="d-flex justify-content-between align-items-center mt-3 text-muted px-3 pb-3">
-            <small>Por:<strong> <a href="perfil.html?autor=${encodeURIComponent(item.autor)}">${item.autor}</a></strong></small>
+          <small>Por:<strong> <a href="perfilapi.html?autor=${encodeURIComponent(item.autor)}">${item.autor}</a></strong></a></small>
+            
             
             <!-- Botão de Compartilhar usando o ID (UUID) do Post -->
             <button class="btn btn-sm btn-outline-secondary" onclick="compartilharPost('${postId}', '${item.titulo}')">
