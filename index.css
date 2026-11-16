@@ -1,3 +1,9 @@
+.post-content {
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+    line-height: 1.6;
+}
+
 @media (min-width: 320px) {
 
     body{

@@ -61,7 +61,7 @@ async function carregarPosts() {
                class="accordion-collapse collapse" 
                aria-labelledby="${headingId}" 
                data-bs-parent="#accordionPosts">
-            <div class="accordion-body">
+            <div class="accordion-body post-content">
               ${item.texto}
             </div>
           </div>
