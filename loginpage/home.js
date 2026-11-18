@@ -253,12 +253,15 @@ setInterval(carregarPosts, 10 * 60 * 1000);
   setInterval(carregarPosts, 10 * 60 * 1000);*/ // Executa a cada 10 minutos
 
   //fazer postagem via front end
-
-  async function postarHomeApi() {
+//funciona
+//antigo postarHomeApi
+//para voltar ao estado anterior é só retirar imagemHomeApi
+ /* async function postarHomeApi() {
 
     //const imagemHomeApi = document.getElementById("imagemhomeapi ").value
     const tituloHomeApi = document.getElementById("titulohomeapi").value
     const textHomeApi = document.getElementById("texthomeapi").value
+    const imagemHomeApi = document.getElementById("imagemhomeapi").value
 
     if (!tituloHomeApi || !textHomeApi){
         alert("Titulo e texto são nescessários!")
@@ -266,7 +269,7 @@ setInterval(carregarPosts, 10 * 60 * 1000);
     }
 
     //const dadosJson = {imagemHomeApi, tituloHomeApi, textHomeApi}
-    const dadosJson = {tituloHomeApi, textHomeApi}
+    const dadosJson = {tituloHomeApi, textHomeApi, imagemHomeApi}
 
     try {
         
@@ -277,6 +280,54 @@ setInterval(carregarPosts, 10 * 60 * 1000);
             },
             credentials: 'include', // ESSENCIAL para receber e salvar o cookie de sessão!
             body: JSON.stringify(dadosJson)
+
+        })
+
+        // Se o servidor recusar (ex: 401 Unauthorized), captura o erro aqui
+        if (!respostaPostarHomeApi.ok) {
+            const erroData = await respostaPostarHomeApi.json().catch(() => ({}));
+            throw new Error(erroData.error || `Erro: ${respostaPostarHomeApi.status}`);
+        }
+
+        const resultadoPostarHomeApi = await respostaPostarHomeApi.json()
+        console.log("Post feito com sucesso!", resultadoPostarHomeApi)
+
+        document.getElementById("titulohomeapi").value = "";
+        document.getElementById("texthomeapi").value = "";
+
+
+    } catch (error) {
+        console.log("Error em postarHomeAp / home.js", error)
+        alert("Falha ao postar: " + error.message);
+    }
+
+
+  }*/
+
+   async function postarHomeApi() {
+
+    const formData = new FormData()
+    formData.append("tituloHomeApi", document.getElementById("titulohomeapi").value);
+formData.append("textHomeApi", document.getElementById("texthomeapi").value);
+formData.append("imagemHomeApi", document.getElementById("imagemhomeapi").files[0]); // Passa o arquivo cru direto!
+
+    if (!tituloHomeApi || !textHomeApi){
+        alert("Titulo e texto são nescessários!")
+        return
+    }
+
+    //const dadosJson = {imagemHomeApi, tituloHomeApi, textHomeApi}
+    const dadosJson = {tituloHomeApi, textHomeApi, imagemHomeApi}
+
+    try {
+        
+        const respostaPostarHomeApi = await fetch('https://dbsqlite.onrender.com/postarfromfrontend', {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include', // ESSENCIAL para receber e salvar o cookie de sessão!
+            body: JSON.stringify(formData)
 
         })
 
