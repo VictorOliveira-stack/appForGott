@@ -308,8 +308,8 @@ setInterval(carregarPosts, 10 * 60 * 1000);
 
     const formData = new FormData()
     formData.append("tituloHomeApi", document.getElementById("titulohomeapi").value);
-formData.append("textHomeApi", document.getElementById("texthomeapi").value);
-formData.append("imagemHomeApi", document.getElementById("imagemhomeapi").files[0]); // Passa o arquivo cru direto!
+    formData.append("textHomeApi", document.getElementById("texthomeapi").value);
+    formData.append("imagemHomeApi", document.getElementById("imagemhomeapi").files[0]); // Passa o arquivo cru direto!
 
     if (!tituloHomeApi || !textHomeApi){
         alert("Titulo e texto são nescessários!")
